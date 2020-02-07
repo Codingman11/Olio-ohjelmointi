@@ -15,9 +15,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         text = (TextView) findViewById(R.id.textView);
+
     }
 
     public void hello(View v) {
-        System.out.println("Hello World!");
+        text.setText("Hello World!");
+
     }
+
 }
