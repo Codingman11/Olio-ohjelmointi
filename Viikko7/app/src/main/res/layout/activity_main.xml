@@ -70,6 +70,12 @@
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.159" />
+=======
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textEdit"
         app:layout_constraintVertical_bias="0.006" />
@@ -100,5 +106,6 @@
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/buttonWrite"
         app:layout_constraintVertical_bias="0.134" />
+>>>>>>> 3bbe7e9943264a2b6fdb78b528aa2b25b15f8d09
 
 </androidx.constraintlayout.widget.ConstraintLayout>
