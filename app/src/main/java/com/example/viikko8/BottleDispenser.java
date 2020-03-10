@@ -14,7 +14,7 @@ public class BottleDispenser {
 
     // The array for the Bottle-objects
 
-    private ArrayList<Bottle> bottle_array;
+    public ArrayList<Bottle> bottle_array;
 
     private double money;
 
@@ -70,4 +70,8 @@ public class BottleDispenser {
         double mon = Math.round(this.money * 100.0) / 100.0;
         System.out.println("Klink klink. Money came out! You got " +  nf.format(mon).replace(".", ",") + "€ back");
     }
-}
+
+    public double getMoney(){ return this.money; }
+
+    public ArrayList<Bottle> getArray() { return this.bottle_array; }
+    }
