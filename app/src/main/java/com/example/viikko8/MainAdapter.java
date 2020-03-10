@@ -28,6 +28,7 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(MainAdapter.ViewHolder holder, int position) {
          holder.mBottle.setText(mbottles.get(position).getName());
+
     }
 
     @Override
