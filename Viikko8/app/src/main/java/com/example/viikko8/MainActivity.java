@@ -1,21 +1,14 @@
 package com.example.viikko8;
 
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.Toast;
-
 import java.util.ArrayList;
-import java.util.Scanner;
-
-import static android.widget.AdapterView.*;
 
 
 public class MainActivity extends AppCompatActivity {
