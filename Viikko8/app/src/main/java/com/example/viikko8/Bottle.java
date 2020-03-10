@@ -34,5 +34,8 @@ public class Bottle {
 
     public double getPrice() { return this.price; }
     public double getSize() { return this.size; }
+    @Override
+    public String toString() { return this.name + ", " + this.size + "l " + this.price + "€"; }
 
 }
+

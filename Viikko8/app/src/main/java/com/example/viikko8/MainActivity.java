@@ -1,41 +1,56 @@
 package com.example.viikko8;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import static android.widget.AdapterView.*;
+
 
 public class MainActivity extends AppCompatActivity {
 
+
+
+    RecyclerView mRecyclerView;
+    RecyclerView.Adapter mAdapter;
+    RecyclerView.LayoutManager mLayout;
+    BottleDispenser bD = BottleDispenser.getInstance();
+    ArrayList<Bottle> bottles = bD.getArray();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        BottleDispenser boDis = BottleDispenser.getInstance();
-        Button addM = (Button) findViewById(R.id.addMoney);
-        initializeUI(boDis, addM);
-
-
+        spinnerChoice();
+        recyclerList();
 
     }
 
-    public void initializeUI(BottleDispenser boDis, Button addM) {
+    public void spinnerChoice() {
+        Spinner spinner = (Spinner) findViewById(R.id.choice_spinner);
 
-        TextView text_view = (TextView) findViewById(R.id.textView);
-        text_view.setText(Double.toString(boDis.getMoney()));
-
-
-
-        Spinner spinner = findViewById(R.id.spinner1);
-
+        ArrayAdapter adapter;
+        adapter = new ArrayAdapter<Bottle>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item,bottles);
+        spinner.setAdapter(adapter);
     }
 
+    public void recyclerList() {
 
+        mRecyclerView = findViewById(R.id.recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mLayout = new LinearLayoutManager(this);
+        mAdapter = new MainAdapter(bottles);
+        mRecyclerView.setLayoutManager(mLayout);
 
+    }
 }

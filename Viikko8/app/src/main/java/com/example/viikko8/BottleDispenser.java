@@ -1,12 +1,20 @@
 package com.example.viikko8;
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
+
+/**
+ *
+ * @author jesse
+ */
 public class BottleDispenser {
-    private static BottleDispenser boDis = null;
-    private ArrayList<Bottle> bottle_array;
+
+    private static BottleDispenser bDis = null;
+
+    // The array for the Bottle-objects
+
+    public ArrayList<Bottle> bottle_array;
 
     private double money;
 
@@ -24,14 +32,13 @@ public class BottleDispenser {
         bottle_array.add(new Bottle("Fanta Zero", "Fanta", 0.5, 1.95));
 
     }
+
     public static BottleDispenser getInstance() {
-        if (boDis == null) {
-            boDis = new BottleDispenser();
+        if (bDis == null) {
+            bDis = new BottleDispenser();
         }
-
-        return boDis;
+        return bDis;
     }
-
 
     public void addMoney() {
         this.money += 1;
@@ -64,8 +71,7 @@ public class BottleDispenser {
         System.out.println("Klink klink. Money came out! You got " +  nf.format(mon).replace(".", ",") + "€ back");
     }
 
-    public double getMoney() {
-        return this.money;
-    }
-}
+    public double getMoney(){ return this.money; }
 
+    public ArrayList<Bottle> getArray() { return this.bottle_array; }
+    }
