@@ -45,14 +45,15 @@ public class BottleDispenser {
         System.out.println("Klink! Added more money!");
     }
 
-    public void buyBottle(int ch) {
+    public boolean buyBottle(int ch) {
         Bottle bottle = bottle_array.get(ch - 1);
         if (this.money < bottle.getPrice()) {
-            System.out.println("Add money first!");
+            return false;
         } else {
             this.money -= bottle.getPrice();
             bottle_array.remove(ch - 1);
             System.out.println("KACHUNK! "  + bottle.getName() + " came out of the dispenser!");
+            return true;
         }
     }
 

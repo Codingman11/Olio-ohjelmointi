@@ -27,7 +27,7 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(MainAdapter.ViewHolder holder, int position) {
-         holder.mBottle.setText(mbottles.get(position).getName());
+         holder.bottle_name.setText(mbottles.get(position).getName() + ",\t" + mbottles.get(position).getSize() + "l,\t" + mbottles.get(position).getPrice() + "€");
 
     }
 
@@ -38,11 +38,13 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView mBottle;
+        public TextView bottle_name;
+        public TextView bottle_size;
         public ViewHolder(View itemView) {
             super(itemView);
 
-            mBottle = itemView.findViewById(R.id.row_bottle);
+            bottle_name = itemView.findViewById(R.id.bottle_name);
+
         }
     }
 }
