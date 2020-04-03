@@ -1,19 +1,18 @@
 package com.example.viikko8;
-
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -22,24 +21,26 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    RecyclerView mRecyclerView;
-    RecyclerView.Adapter mAdapter;
-    RecyclerView.LayoutManager mLayout;
-    BottleDispenser bD = BottleDispenser.getInstance();
-    ArrayList<Bottle> bottles = bD.getArray();
-    TextView bala;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayout;
+    private BottleDispenser bD = BottleDispenser.getInstance();
+    private ArrayList<Bottle> bottles = bD.getArray();
+    private TextView seekBMon;
+    private TextView bala;
+    private TextView info;
+    private SeekBar skbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        seekBarSlide();
         spinnerChoice();
         recyclerList();
         bala = findViewById(R.id.balance);
-
-
-
-
+        info = findViewById(R.id.textView2);
+        bala.setText("Balance: " + bD.getMoney());
     }
 
     public void spinnerChoice() {
@@ -56,39 +57,57 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
-                TextView botl = findViewById(R.id.textView2);
-                String text = parentView.getItemAtPosition(position).toString();
 
-                botl.setText(text);
+                String text = parentView.getItemAtPosition(position).toString();
+                info.setText(text);
                 bottles.remove(position);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
+        });
+    }
+
+    public void seekBarSlide() {
+        skbar = (SeekBar) findViewById(R.id.seekBar1);
+        seekBMon = (TextView) findViewById(R.id.seekBarMoney);
+
+
+        skbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int pval = 0;
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                pval = progress;
+                seekBMon.setText(Integer.toString(pval));
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
+            public void onStartTrackingTouch(SeekBar seekBar) {
 
             }
 
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                seekBMon.setText(Integer.toString(pval));
+            }
         });
-
     }
-
     public void recyclerList() {
-
         mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
-
         mAdapter = new MainAdapter(bottles);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         mRecyclerView.setAdapter(mAdapter);
-
     }
 
     public void addM(View v) {
-        bD.addMoney();
-        bala.setText("balance: " + bD.getMoney());
+        Double money = Double.parseDouble((String) seekBMon.getText());
+        bD.addMoney(money);
+        bala.setText("Balance: " + bD.getMoney());
     }
 
     public void returnM(View v) {
-
+        info.setText(bD.returnMoney());
+        bala.setText("Balance: " + 0);
     }
 }

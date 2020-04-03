@@ -11,15 +11,11 @@
       <change beforePath="$PROJECT_DIR$/../../Viikko7/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../../Viikko7/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Viikko7/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Viikko7/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Viikko7/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Viikko7/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/viikko8/BottleDispenser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/viikko8/BottleDispenser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/viikko8/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/viikko8/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/viikko8/MainAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/viikko8/MainAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/row.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/row.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -246,6 +242,14 @@
       <option name="presentableId" value="Default" />
       <updated>1583854438076</updated>
     </task>
+    <task id="LOCAL-00001" summary="Viikko 8 tehtävä 2">
+      <created>1585567768266</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1585567768266</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -260,5 +264,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Viikko 8 tehtävä 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Viikko 8 tehtävä 2" />
   </component>
 </project>
