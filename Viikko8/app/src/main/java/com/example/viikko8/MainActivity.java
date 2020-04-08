@@ -110,4 +110,6 @@ public class MainActivity extends AppCompatActivity {
         info.setText(bD.returnMoney());
         bala.setText("Balance: " + 0);
     }
+
+
 }

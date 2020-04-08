@@ -2,16 +2,13 @@ package com.example.viikko9;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -20,7 +17,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -31,18 +27,28 @@ public class MainActivity extends AppCompatActivity {
 
     smartPost sPostEE = smartPost.getInstance();
     smartPost sPostFI = smartPost.getInstance();
-    ArrayList<Posti> viroLista = sPostEE.getPostiLista();
+    ArrayList<Posti> viroPostit = sPostEE.getPostiLista();
+    ArrayList<Posti> suomiPostit = sPostFI.getPostiLista();
+    ArrayList<String> countriesList;
+    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        makeCountriesList();
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
 
 
 
+    }
+
+    public void makeCountriesList() {
+        countriesList = new ArrayList<>();
+        countriesList.add("Suomi");
+        countriesList.add("Viro");
     }
 
     public void readXML(View v) {
@@ -55,9 +61,11 @@ public class MainActivity extends AppCompatActivity {
             Document doc1 = builder.parse(viroURL);
             Document doc2 = builder.parse(suomiURL);
             doc1.getDocumentElement().normalize();
-            NodeList nList = doc1.getDocumentElement().getElementsByTagName("item");
-            for (int i = 0; i < nList.getLength(); i++) {
-                Node node = nList.item(i);
+            doc2.getDocumentElement().normalize();
+            NodeList nListEE = doc1.getDocumentElement().getElementsByTagName("item");
+
+            for (int i = 0; i < nListEE.getLength(); i++) {
+                Node node = nListEE.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
                     String id = element.getElementsByTagName("place_id").item(0).getTextContent();
@@ -68,6 +76,23 @@ public class MainActivity extends AppCompatActivity {
                     sPostEE.addSmartP(id, name, city, address, avail);
                 }
             }
+            NodeList nListFI = doc2.getElementsByTagName("item");
+            for (int i = 0; i < nListFI.getLength(); i++) {
+                Node node = nListFI.item(i);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) node;
+                    String id = element.getElementsByTagName("place_id").item(0).getTextContent();
+                    String name = element.getElementsByTagName("name").item(0).getTextContent();
+                    String city = element.getElementsByTagName("city").item(0).getTextContent();
+                    String address = element.getElementsByTagName("address").item(0).getTextContent();
+                    String avail = element.getElementsByTagName("availability").item(0).getTextContent();
+                    sPostFI.addSmartP(id, name, city, address, avail);
+                }
+            }
+
+
+
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SAXException e) {
@@ -75,24 +100,40 @@ public class MainActivity extends AppCompatActivity {
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } finally {
-            spinnerPost();
+            spinnerCountries();
+            spinnerPostFI();
         }
-
-        /*for(int i = 0; i < sPostEE.getPostiLista().size(); i++ ) {
-
-            System.out.println(sPostEE.getPostiLista().get(i).getName() );
-        }
-
-         */
-
 
     }
 
-    public void spinnerPost() {
-        Spinner spinner = findViewById(R.id.spinner);
+    public void spinnerCountries() {
+        Spinner spinner = findViewById(R.id.spinner1);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, countriesList);
+        spinner.setAdapter(adapter);
+        spinner.setSelected(false);
+        spinner.setSelection(0, false);
 
-        ArrayAdapter<Posti> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, sPostEE.getPostiLista());
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if(parent.getSelectedItemPosition() == 0) {
+                    spinnerPostFI();
+                } else if (parent.getSelectedItemPosition() == 1) {
+                    spinnerPostEE();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        } );
+    }
+
+    public void spinnerPostEE() {
+        Spinner spinner = findViewById(R.id.spinner2);
+        ArrayAdapter<Posti> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, viroPostit);
         spinner.setAdapter(adapter);
         spinner.setSelected(false);
         spinner.setSelection(0, true);
@@ -102,10 +143,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                info.setText("Nimi: " + sPostEE.getPostiLista().get(position).getName() +
-                            "\nKaupunki: " + sPostEE.getPostiLista().get(position).getCity() +
-                            "\nOsoite: " + sPostEE.getPostiLista().get(position).getAddress() +
-                            "\nAukioloajat: " + sPostEE.getPostiLista().get(position).getAvail());
+                info.setText("Nimi: " + viroPostit.get(position).getName() +
+                            "\nKaupunki: " + viroPostit.get(position).getCity() +
+                            "\nOsoite: " + viroPostit.get(position).getAddress() +
+                            "\nAukioloajat: " + viroPostit.get(position).getAvail());
             }
 
             @Override
@@ -115,4 +156,28 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void spinnerPostFI() {
+        Spinner spinner = findViewById(R.id.spinner2);
+        ArrayAdapter<Posti> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, suomiPostit);
+        spinner.setAdapter(adapter);
+        spinner.setSelected(false);
+        spinner.setSelection(0, true);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            TextView info = findViewById(R.id.postiTiedot);
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                info.setText("Nimi: " + suomiPostit.get(position).getName() +
+                        "\nKaupunki: " + suomiPostit.get(position).getCity() +
+                        "\nOsoite: " + suomiPostit.get(position).getAddress() +
+                        "\nAukioloajat: " + suomiPostit.get(position).getAvail());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
 }

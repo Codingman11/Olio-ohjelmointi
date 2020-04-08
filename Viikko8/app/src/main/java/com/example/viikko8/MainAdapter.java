@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -18,7 +18,8 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         mbottles = bottles;
 
     }
-    @NonNull
+
+
     @Override
     public MainAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row, parent, false);
@@ -36,7 +37,7 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         return mbottles.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView bottle_name;
         public TextView bottle_size;
