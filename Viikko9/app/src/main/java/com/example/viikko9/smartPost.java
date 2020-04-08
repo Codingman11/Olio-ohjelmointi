@@ -6,7 +6,7 @@ public class smartPost {
 
     private static smartPost sPost;
     ArrayList<Posti> postiLista;
-    ArrayList<String> lista = new ArrayList<>();
+    ArrayList<String> lista;g
 
 
     public smartPost( ) {

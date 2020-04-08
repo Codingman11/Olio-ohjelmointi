@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     smartPost sPostEE = smartPost.getInstance();
     smartPost sPostFI = smartPost.getInstance();
-    ArrayList<Posti> viroPostit = sPostEE.getPostiLista();
-    ArrayList<Posti> suomiPostit = sPostFI.getPostiLista();
+
+
     ArrayList<String> countriesList;
     
 
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     }
 
     public void makeCountriesList() {
@@ -51,17 +52,16 @@ public class MainActivity extends AppCompatActivity {
         countriesList.add("Viro");
     }
 
-    public void readXML(View v) {
+    public void readXMLEE(View v) {
         DocumentBuilder builder = null;
 
         try {
             builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             String viroURL = "http://iseteenindus.smartpost.ee/api/?request=destinations&country=EE&type=APT";
-            String suomiURL = "http://iseteenindus.smartpost.ee/api/?request=destinations&country=FI&type=APT";
+
             Document doc1 = builder.parse(viroURL);
-            Document doc2 = builder.parse(suomiURL);
             doc1.getDocumentElement().normalize();
-            doc2.getDocumentElement().normalize();
+
             NodeList nListEE = doc1.getDocumentElement().getElementsByTagName("item");
 
             for (int i = 0; i < nListEE.getLength(); i++) {
@@ -76,7 +76,27 @@ public class MainActivity extends AppCompatActivity {
                     sPostEE.addSmartP(id, name, city, address, avail);
                 }
             }
-            NodeList nListFI = doc2.getElementsByTagName("item");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } finally {
+
+        }
+    }
+
+    public void readXMLFI(View v) {
+        DocumentBuilder builder = null;
+        try {
+            builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            String suomiURL = "http://iseteenindus.smartpost.ee/api/?request=destinations&country=FI&type=APT";
+
+            Document doc1 = builder.parse(suomiURL);
+            doc1.getDocumentElement().normalize();
+            NodeList nListFI = doc1.getElementsByTagName("item");
             for (int i = 0; i < nListFI.getLength(); i++) {
                 Node node = nListFI.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -92,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SAXException e) {
@@ -101,28 +120,29 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         } finally {
             spinnerCountries();
-            spinnerPostFI();
         }
-
     }
 
     public void spinnerCountries() {
-        Spinner spinner = findViewById(R.id.spinner1);
+        final Spinner spinner = findViewById(R.id.spinner1);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, countriesList);
         spinner.setAdapter(adapter);
-        spinner.setSelected(false);
-        spinner.setSelection(0, false);
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if(parent.getSelectedItemPosition() == 0) {
+                if(spinner.getSelectedItemPosition() == 0) {
                     spinnerPostFI();
-                } else if (parent.getSelectedItemPosition() == 1) {
+                } else if (spinner.getSelectedItemPosition() == 1) {
                     spinnerPostEE();
                 }
+
+
+
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -132,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void spinnerPostEE() {
+        final ArrayList<Posti> viroPostit = sPostEE.getPostiLista();
         Spinner spinner = findViewById(R.id.spinner2);
         ArrayAdapter<Posti> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, viroPostit);
         spinner.setAdapter(adapter);
@@ -139,14 +160,14 @@ public class MainActivity extends AppCompatActivity {
         spinner.setSelection(0, true);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            TextView info = findViewById(R.id.postiTiedot);
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                TextView info = findViewById(R.id.postiTiedot);
                 info.setText("Nimi: " + viroPostit.get(position).getName() +
-                            "\nKaupunki: " + viroPostit.get(position).getCity() +
-                            "\nOsoite: " + viroPostit.get(position).getAddress() +
-                            "\nAukioloajat: " + viroPostit.get(position).getAvail());
+                        "\nKaupunki: " + viroPostit.get(position).getCity() +
+                        "\nOsoite: " + viroPostit.get(position).getAddress() +
+                        "\nAukioloajat: " + viroPostit.get(position).getAvail());
             }
 
             @Override
@@ -157,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void spinnerPostFI() {
+        final ArrayList<Posti> suomiPostit = sPostFI.getPostiLista();
         Spinner spinner = findViewById(R.id.spinner2);
         ArrayAdapter<Posti> adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, suomiPostit);
         spinner.setAdapter(adapter);
@@ -164,14 +186,17 @@ public class MainActivity extends AppCompatActivity {
         spinner.setSelection(0, true);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            TextView info = findViewById(R.id.postiTiedot);
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+                TextView info = findViewById(R.id.postiTiedot);
                 info.setText("Nimi: " + suomiPostit.get(position).getName() +
                         "\nKaupunki: " + suomiPostit.get(position).getCity() +
                         "\nOsoite: " + suomiPostit.get(position).getAddress() +
                         "\nAukioloajat: " + suomiPostit.get(position).getAvail());
+
+
             }
 
             @Override
