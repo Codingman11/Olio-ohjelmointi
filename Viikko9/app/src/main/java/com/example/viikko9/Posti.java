@@ -32,5 +32,12 @@ public class Posti extends smartPost{
         return this.address;
     }
 
+    public String getAvail() {
+        return this.avail;
+    }
+
+    @Override
+    public String toString() {return this.name;}
+
 
 }
