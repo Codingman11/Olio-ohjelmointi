@@ -12,6 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
+        android:freezesText="false"
+        android:onClick="addM"
         android:text="Add Money"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,6 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="88dp"
+        android:onClick="returnM"
         android:text="Take Money"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,25 +60,62 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
-        android:layout_width="397dp"
-        android:layout_height="210dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="402dp"
+        android:layout_height="190dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="5dp"
         app:layout_constraintBottom_toTopOf="@+id/choice_spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75" />
+        app:layout_constraintVertical_bias="0.055" />
 
     <TextView
         android:id="@+id/balance"
-        android:layout_width="129dp"
-        android:layout_height="33dp"
+        android:layout_width="170dp"
+        android:layout_height="22dp"
+        android:freezesText="false"
         android:text="Balance: "
-        app:layout_constraintBottom_toTopOf="@+id/recycler_view"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintHorizontal_bias="0.17"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.714"
-        tools:text="Balance" />
+        app:layout_constraintVertical_bias="0.599" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="68dp"
+        android:text="Bottle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/takeMoney" />
+
+    <SeekBar
+        android:id="@+id/seekBar1"
+        android:layout_width="337dp"
+        android:layout_height="24dp"
+        android:max="40"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.676" />
+
+    <TextView
+        android:id="@+id/seekBarMoney"
+        android:layout_width="54dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="16dp"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/seekBar1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.669"
+        tools:text="0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
