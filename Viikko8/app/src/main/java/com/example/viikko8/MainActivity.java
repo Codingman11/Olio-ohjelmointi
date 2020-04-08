@@ -1,8 +1,12 @@
 package com.example.viikko8;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,13 +24,16 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.LayoutManager mLayout;
     BottleDispenser bD = BottleDispenser.getInstance();
     ArrayList<Bottle> bottles = bD.getArray();
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         spinnerChoice();
         recyclerList();
-
+        TextView text = findViewById(R.id.textView1);
+        Button bt =  findViewById(R.id.addMoney);
+        text.setText("Money: " + bD.getMoney() + "€");
     }
 
     public void spinnerChoice() {
@@ -44,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         mLayout = new LinearLayoutManager(this);
         mAdapter = new MainAdapter(bottles);
         mRecyclerView.setLayoutManager(mLayout);
-
+        mRecyclerView.setAdapter(mAdapter);
     }
+
+
 }
