@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         Spinner spinner = (Spinner) findViewById(R.id.choice_spinner);
 
-        ArrayAdapter adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, bottles);;
+        ArrayAdapter adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, bottles);
         spinner.setAdapter(adapter);
         spinner.setSelected(false);
         spinner.setSelection(0, true);
