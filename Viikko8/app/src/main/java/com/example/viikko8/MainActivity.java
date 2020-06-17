@@ -59,8 +59,17 @@ public class MainActivity extends AppCompatActivity {
 
 
                 String text = parentView.getItemAtPosition(position).toString();
-                info.setText(text);
-                bottles.remove(position);
+
+                if(!bD.buyBottle(position)) {
+                    info.setText("Insufficient funds!");
+                } else {
+
+                    info.setText("Bought: " + text);
+                    bottles.remove(position);
+                    bala.setText("Balance: " + Double.toString((double) bD.getMoney()));
+                    mAdapter.notifyItemRemoved(position);
+                    mAdapter.notifyItemRangeChanged(position, bottles.size());
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
@@ -79,18 +88,21 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 pval = progress;
                 seekBMon.setText(Integer.toString(pval));
+
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 seekBMon.setText(Integer.toString(pval));
+
             }
         });
+
+
     }
     public void recyclerList() {
         mRecyclerView = findViewById(R.id.recycler_view);
@@ -103,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
     public void addM(View v) {
         Double money = Double.parseDouble((String) seekBMon.getText());
         bD.addMoney(money);
+        skbar.setProgress(0);
         bala.setText("Balance: " + bD.getMoney());
     }
 

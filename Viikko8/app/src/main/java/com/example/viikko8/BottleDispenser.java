@@ -50,13 +50,12 @@ public class BottleDispenser {
     }
 
     public boolean buyBottle(int ch) {
-        Bottle bottle = bottle_array.get(ch - 1);
+        Bottle bottle = bottle_array.get(ch);
         if (this.money < bottle.getPrice()) {
             return false;
         } else {
             this.money -= bottle.getPrice();
-            bottle_array.remove(ch - 1);
-            System.out.println("KACHUNK! "  + bottle.getName() + " came out of the dispenser!");
+
             return true;
         }
     }
@@ -73,7 +72,9 @@ public class BottleDispenser {
     public String returnMoney() {
         NumberFormat nf = new DecimalFormat("#0.00");
         double mon = Math.round(this.money * 100.0) / 100.0;
+        this.money = 0;
         return "You got " +  nf.format(mon).replace(".", ",") + "€ back";
+
     }
 
 
