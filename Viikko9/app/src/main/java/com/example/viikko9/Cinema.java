@@ -28,4 +28,8 @@ public class Cinema {
         this.place = place;
     }
 
+    @Override
+    public String toString() {
+        return place;
+    }
 }
