@@ -13,12 +13,16 @@ import java.util.ArrayList;
 
 class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
+
     ArrayList<Cinema> mCinList;
+    ArrayList<String> movies;
+    /*public MainAdapter(ArrayList<Cinema> cinList) {
+         this.mCinList = cinList;
+    }*/
 
-    public MainAdapter(ArrayList<Cinema> cinList) {
-        mCinList = cinList;
+    public MainAdapter(ArrayList<String> mov) {
+        this.movies = mov;
     }
-
 
     @Override
     public MainAdapter.ViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
@@ -28,12 +32,15 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(MainAdapter.ViewHolder holder, int position) {
-        holder.cinema_id.setText(mCinList.get(position).getId() + ", \t\t" + mCinList.get(position).getPlace());
+        //holder.cinema_id.setText(mCinList.get(position).getPlace() + ", \t\t" + mCinList.get(position).getCinema());
+
+        holder.cinema_id.setText(movies.get(position));
+
     }
 
     @Override
     public int getItemCount() {
-        return mCinList.size();
+        return movies.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
