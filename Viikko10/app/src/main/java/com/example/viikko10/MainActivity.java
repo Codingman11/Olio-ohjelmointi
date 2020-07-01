@@ -14,7 +14,9 @@ import android.widget.EditText;
 public class MainActivity extends AppCompatActivity {
 
     private WebView web;
-    private Button btn;
+    private Button searchBtn;
+    private Button refreshBtn;
+
     private EditText etURL;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +28,21 @@ public class MainActivity extends AppCompatActivity {
         WebSettings settings = web.getSettings();
         settings.setJavaScriptEnabled(true);
 
-        btn = findViewById(R.id.button1);
+        searchBtn = findViewById(R.id.search_button);
+        refreshBtn = findViewById(R.id.refreshBtn);
         etURL = findViewById(R.id.etURL);
-        btn.setOnClickListener(new View.OnClickListener() {
+        searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 web.setWebViewClient(new WebViewClient());
                 web.loadUrl("http://" + etURL.getText());
+            }
+        });
+
+        refreshBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                web.reload();
             }
         });
 
