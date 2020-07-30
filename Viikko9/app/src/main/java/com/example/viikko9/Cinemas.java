@@ -23,8 +23,8 @@ public class Cinemas {
         return cinemas;
     }
 
-    public void addList(String id, String place, String cinema) {
-        cinemas.add(new Cinema(id, place, cinema));
+    public void addList(String id, String place) {
+        cinemas.add(new Cinema(id, place));
     }
 
     public void printList() {

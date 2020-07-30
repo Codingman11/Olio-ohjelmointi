@@ -22,13 +22,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictModeg.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         web = findViewById(R.id.webView);
         WebSettings settings = web.getSettings();
         settings.setJavaScriptEnabled(true);
+        web.loadUrl("file:///android_asset/index.html");
 
-        searchBtn = findViewById(R.id.search_button);
+
+
+
+
+
+
+        /*searchBtn = findViewById(R.id.search_button);
         refreshBtn = findViewById(R.id.refreshBtn);
         etURL = findViewById(R.id.etURL);
         searchBtn.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 web.reload();
             }
-        });
+        });*/
 
     }
 }
